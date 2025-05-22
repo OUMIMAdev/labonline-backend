@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Prendre Rendez-vous - MyLabOnline</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #ffffff;
+    }
+    .form-section {
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container form-section">
+    <h1 class="text-center mb-4 text-primary">Prendre un Rendez-vous</h1>
+
+    <div class="card shadow">
+      <div class="card-body">
+
+        <form id="appointmentForm">
+          <div class="mb-3">
+            <label for="labName" class="form-label">Laboratoire</label>
+            <input type="text" class="form-control" id="labName" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label for="fullName" class="form-label">Nom complet</label>
+            <input type="text" class="form-control" id="fullName" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Adresse Email</label>
+            <input type="email" class="form-control" id="email" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="time" class="form-label">Heure</label>
+            <input type="time" class="form-control" id="time" required>
+          </div>
+
+          <button type="submit" class="btn btn-success w-100">Confirmer Rendez-vous</button>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- Message de succès -->
+    <div id="successMessage" class="alert alert-success text-center mt-4" style="display: none;">
+      <strong>Rendez-vous confirmé avec succès !</strong><br>
+      <p id="appointmentDetails"></p>
+    </div>
+  </div>
+
+  <!-- Script pour récupérer le nom du laboratoire depuis l'URL -->
+  <script>
+    // Fonction pour récupérer les paramètres de l'URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Récupérer le labo depuis l'URL
+    const labName = getQueryParam('lab');
+
+    // Afficher le nom du labo dans un champ readonly
+    if (labName) {
+      document.getElementById('labName').value = decodeURIComponent(labName);
+    }
+  </script>
+
+  <!-- Script pour valider le formulaire et afficher les détails -->
+  <script>
+    const form = document.getElementById('appointmentForm');
+    const successMessage = document.getElementById('successMessage');
+    const appointmentDetails = document.getElementById('appointmentDetails');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Empêcher l'envoi classique du formulaire
+
+      // Récupérer les valeurs saisies par l'utilisateur
+      const fullName = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+
+      // Validation basique : Vérifier que les champs sont remplis
+      if (!fullName || !email || !date || !time) {
+        alert("Veuillez remplir tous les champs !");
+        return;
+      }
+
+      // Afficher les détails du rendez-vous
+      appointmentDetails.innerHTML = `
+        <strong>Laboratoire :</strong> ${decodeURIComponent(labName)}<br>
+        <strong>Nom :</strong> ${fullName}<br>
+        <strong>Email :</strong> ${email}<br>
+        <strong>Date :</strong> ${date}<br>
+        <strong>Heure :</strong> ${time}
+      `;
+
+      // Simuler un succès
+      form.reset(); // Réinitialiser le formulaire
+      successMessage.style.display = "block"; // Afficher le message de succès
+    });
+  </script>
+
+</body>
+</html>

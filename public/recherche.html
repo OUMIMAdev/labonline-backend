@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Recherche de Laboratoire - MyLabOnline</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+   body {
+  background-color: #189f91;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Section de recherche */
+.search-section {
+  margin-top: 60px;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre principal */
+.search-section h1 {
+  color: #189f91;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+/* Barre de recherche */
+.input-group .form-control {
+  border-radius: 50px 0 0 50px;
+  border: 2px solid #189f91;
+  padding: 10px 20px;
+}
+
+.input-group .btn-primary {
+  background-color: #189f91;
+  border: 2px solid #189f91;
+  border-radius: 0 50px 50px 0;
+  padding: 10px 25px;
+  transition: background-color 0.3s ease;
+}
+
+.input-group .btn-primary:hover {
+  background-color: #189f91;
+  border-color: #189f91;
+}
+
+/* Cartes labo */
+.card-labo {
+  border: none;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.card-labo:hover {
+  transform: translateY(-5px);
+}
+
+.card-labo .card-body {
+  padding: 25px;
+}
+
+.card-labo .card-title {
+  color: #244F76;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.card-labo .card-subtitle {
+  color: #9AD0C2;
+  font-weight: 600;
+}
+
+.card-labo .card-text {
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Boutons */
+.card-labo .btn-success {
+  background-color: #189f91;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 18px;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.card-labo .btn-success:hover {
+  background-color: #189f91;
+}
+
+/* Alerte en cas de non-trouve */
+.alert-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border: none;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="container search-section">
+    <h1 class="text-center mb-4">Trouvez un Laboratoire</h1>
+
+    <!-- Barre de recherche -->
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="input-group">
+          <input type="text" id="searchInput" class="form-control" placeholder="Ville ou Nom du laboratoire...">
+          <button class="btn btn-primary" onclick="searchLabs()">Chercher</button>
+        </div>
+      </div>
+    </div>
+    <img href="bg-bottom-hero3.png">
+
+    <!-- Résultats de recherche -->
+    <div id="results" class="mt-5"></div>
+  </div>
+
+  <script>
+    const labs = [
+      { name: "Laboratoire BENABADJI", city: "Alger", address: "Rue Didouche Mourad", mapLink: "https://maps.app.goo.gl/EFfaiV6zB2pWrFKL7" },
+      { name: "Laboratoire KHOURI", city: "Tipaza", address: "Centre-ville", mapLink: "https://maps.app.goo.gl/X45QyN7PcBzZ6DHFA" },
+      { name: "Laboratoire Dr I.Boubekri", city: "Oran", address: "Quartier Akid Lotfi", mapLink: "https://maps.app.goo.gl/1Nb4Tgh5pF4nNHrR8" },
+      { name: "Laboratoire Dr Abderrezak BENGOUFA", city: "Blida", address: "Place des Martyrs", mapLink: "https://maps.app.goo.gl/CpxQvco64ybhY7aQA" }
+    ];
+
+    function searchLabs() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = "";
+
+      const filteredLabs = labs.filter(lab =>
+        lab.name.toLowerCase().includes(input) ||
+        lab.city.toLowerCase().includes(input)
+      );
+
+      if (filteredLabs.length > 0) {
+        filteredLabs.forEach(lab => {
+          resultsDiv.innerHTML += `
+            <div class="card card-labo mb-4">
+              <div class="card-body">
+                <h5 class="card-title">${lab.name}</h5>
+                <h6 class="card-subtitle mb-2">${lab.city}</h6>
+                <p class="card-text">${lab.address}</p>
+                <a href="prendre.html?lab=${encodeURIComponent(lab.name)}" class="btn btn-success me-2">Prendre Rendez-vous</a>
+                <a href="${lab.mapLink}" target="_blank" class="btn btn-success">Voir sur la carte</a>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        resultsDiv.innerHTML = `
+          <div class="alert alert-warning text-center" role="alert">
+            Aucun laboratoire trouvé !
+          </div>
+        `;
+      }
+    }
+  </script>
+
+</body>
+</html>

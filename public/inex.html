@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabOnline - Connexion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #189f91; 
+            --secondary-color: #ffffff; 
+            --accent-color: #209677; 
+            --light-bg: #f8f9fa;
+            --text-dark: #209677;
+            --text-light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #ffffff;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:#ffffff;
+            z-index: 0;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 800px;
+            max-width: 95%;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            min-height: 300px;
+        }
+        
+        .login-form {
+            width: 50%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .welcome-section {
+            width: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+        
+        .welcome-section::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+        }
+        
+        .logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+        
+        .welcome-section h1 {
+            color: white;
+            font-size: 32px;
+        }
+        
+        p {
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+        
+        .welcome-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            max-width: 350px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .form-group i {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: var(--primary-color);
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
+        }
+        
+        button {
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 119, 182, 0.3);
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin: 10px 0 20px;
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+        
+        .language-selector select {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-color);
+            background-color: white;
+            color: var(--primary-color);
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .medical-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .medical-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            font-size: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .login-form, 
+            .welcome-section {
+                width: 100%;
+                padding: 40px 30px;
+            }
+            
+            .welcome-section {
+                padding: 60px 30px;
+            }
+            
+            .language-selector {
+                top: 10px;
+                right: 10px;
+            }
+        }
+        
+        /* RTL support for Arabic */
+        html[dir="rtl"] {
+            direction: rtl;
+        }
+        
+        html[dir="rtl"] .form-group i {
+            left: auto;
+            right: 15px;
+        }
+        
+        html[dir="rtl"] input {
+            padding: 15px 45px 15px 15px;
+        }
+        
+        html[dir="rtl"] .forgot-password {
+            text-align: left;
+        }
+        
+        html[dir="rtl"] .language-selector {
+            right: auto;
+            left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector" id="languageSelector">
+        <select id="language">
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    
+    <div class="container">
+        <div class="login-form">
+            <img src="LAB.png" alt="LabOnline Logo" class="logo">
+            <h1 id="loginTitle">Connexion</h1>
+            <p id="loginSubtitle">Accédez à votre espace laboratoire</p>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                
+                <div class="form-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Mot de passe" required>
+                </div>
+                
+                <div class="forgot-password">
+                    <a href="#" id="forgotPassword">Mot de passe oublié ?</a>
+                </div>
+                
+                <button type="submit" id="loginButton">Se connecter</button>
+            </form>
+        </div>
+        
+        <div class="welcome-section">
+            <h1 id="welcomeTitle">Bienvenue sur LabOnline</h1>
+            <p id="welcomeText">La plateforme de gestion des laboratoires d'analyse médicale en Algérie</p>
+            
+            <div class="medical-icons">
+                <div class="medical-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <div class="medical-icon">
+                    <i class="fas fa-microscope"></i>
+                </div>
+                <div class="medical-icon">
+                    <i class="fas fa-vial"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Translations for all languages
+        const translations = {
+            en: {
+                loginTitle: "Login",
+                loginSubtitle: "Access your laboratory dashboard",
+                emailPlaceholder: "Email",
+                passwordPlaceholder: "Password",
+                forgotPassword: "Forgot password?",
+                loginButton: "Sign In",
+                welcomeTitle: "Welcome to LabOnline",
+                welcomeText: "The medical laboratory management platform in Algeria"
+            },
+            fr: {
+                loginTitle: "Connexion",
+                loginSubtitle: "Accédez à votre espace laboratoire",
+                emailPlaceholder: "Email",
+                passwordPlaceholder: "Mot de passe",
+                forgotPassword: "Mot de passe oublié ?",
+                loginButton: "Se connecter",
+                welcomeTitle: "Bienvenue sur LabOnline",
+                welcomeText: "La plateforme de gestion des laboratoires d'analyse médicale en Algérie"
+            },
+            ar: {
+                loginTitle: "تسجيل الدخول",
+                loginSubtitle: "الوصول إلى لوحة تحكم المختبر",
+                emailPlaceholder: "البريد الإلكتروني",
+                passwordPlaceholder: "كلمة المرور",
+                forgotPassword: "هل نسيت كلمة المرور؟",
+                loginButton: "تسجيل الدخول",
+                welcomeTitle: "مرحبًا بكم في LabOnline",
+                welcomeText: "منصة إدارة مختبرات التحاليل الطبية في الجزائر"
+            }
+        };
+
+        // Function to change language
+        function changeLanguage(lang) {
+            // Update text content
+            document.getElementById('loginTitle').textContent = translations[lang].loginTitle;
+            document.getElementById('loginSubtitle').textContent = translations[lang].loginSubtitle;
+            document.getElementById('email').placeholder = translations[lang].emailPlaceholder;
+            document.getElementById('password').placeholder = translations[lang].passwordPlaceholder;
+            document.getElementById('forgotPassword').textContent = translations[lang].forgotPassword;
+            document.getElementById('loginButton').textContent = translations[lang].loginButton;
+            document.getElementById('welcomeTitle').textContent = translations[lang].welcomeTitle;
+            document.getElementById('welcomeText').textContent = translations[lang].welcomeText;
+            
+            // Handle RTL for Arabic
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = lang;
+            }
+        }
+
+        // Initialize with French as default
+        changeLanguage('fr');
+
+        // Language selector event
+        document.getElementById('language').addEventListener('change', function() {
+            changeLanguage(this.value);
+        });
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Here you would normally handle the login logic
+            console.log('Login attempt with:', email, password);
+            
+            // Add your actual authentication logic here
+            // For example:
+            // authenticateUser(email, password).then(...)
+        });
+    </script>
+</body>
+</html>
