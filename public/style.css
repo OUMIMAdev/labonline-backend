@@ -5,10 +5,39 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+body {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+body.fade-in {
+  opacity: 1;
+}
+
 html{
   scroll-behavior: smooth;
 }
+.language-selector {
+      position: fixed;
+      top: 27px;
+      right: 20px;
+      z-index: 2000;
+      color: #189f91;
+    }
+.language-selector select:focus {
+  outline: none;
+  border: 1px solid #189f91;
+}
 
+    .language-selector select {
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: 1px solid var(--primary-color);
+      background-color: white;
+      color: var(--primary-color);
+      font-weight: 500;
+      cursor: pointer;
+    }
 .container {
   max-width: 1300px;
   width: 100%;
@@ -32,6 +61,8 @@ header {
   padding: 10px 0;
 }
 .menu_items {
+  padding-top: 13px;
+  padding-right: 60px;
   display: flex;
   list-style: none;
   gap: 20px;

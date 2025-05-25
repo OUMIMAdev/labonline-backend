@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <script src="main.js" defer></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -19,7 +18,7 @@
           </a>
           <ul class="menu_items">
             <img src="times.svg" alt="timesicon" id="menu_toggle" />
-            <li><a href="#" class="nav_link">Home</a></li>
+            <li><a href="index.html" class="nav_link">Home</a></li>
             <li><a href="about.html" class="nav_link">About</a></li>
             <li><a href="#ser" class="nav_link">Service</a></li>
             <li><a href="cntact.html" class="nav_link">Contact</a></li>
@@ -27,6 +26,14 @@
           <img src="bars.svg" alt="timesicon" id="menu_toggle" />
         </nav>
       </header>
+      <!-- Sélecteur de langue -->
+  <div class="language-selector">
+    <select id="languageSelector">
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
       <!-- Header End -->
       
       <!-- Hero Start -->
@@ -167,7 +174,7 @@
 
       async function fetchLabs() {
         try {
-          const response = await fetch('http://localhost:3000/api/labos');
+          const response = await fetch('https://labonline-backend.onrender.com/api/labos/near?lng=2.45&lat=36.59&maxDistance=5000');
           if (!response.ok) throw new Error('Erreur réseau');
           const data = await response.json();
           return data;
@@ -271,6 +278,108 @@
         origin: 'bottom',
         easing: 'ease-in-out'
       });
+    
+  // Quand la page est chargée, on active l'effet fade-in
+  document.addEventListener("DOMContentLoaded", function () {
+    document.body.classList.add("fade-in");
+  });
+
+  // Lorsqu'on clique sur un lien, on ajoute un effet de fade-out
+  document.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      const href = link.getAttribute("href");
+
+      // Ne pas appliquer aux ancres internes (#) ou liens externes
+      if (!href.startsWith("#") && !href.startsWith("http")) {
+        e.preventDefault();
+        document.body.classList.remove("fade-in");
+        document.body.style.opacity = 0;
+
+        setTimeout(() => {
+          window.location.href = href;
+        }, 300); // délai identique à la transition
+      }
+    });
+  });
+
+  const translations = {
+    fr: {
+      home: "Accueil",
+      about: "À propos",
+      service: "Service",
+      contact: "Contact",
+      heroTitle: "LabOnline <br/>Trouver votre laboratoire",
+      heroText: "Trouver le meilleur laboratoire pour vous maintenant",
+      findLab: "Trouver un labo",
+      login: "Se Connecter",
+      servicesTitle: "Nos Services",
+      servicesDesc: "Découvrez les fonctionnalités que LabOnline vous propose",
+      labsNearby: "🔬 Laboratoires près de chez vous",
+      btnLocate: "Afficher les labos autour de moi",
+      footer: "&copy; 2025 LabOnline. Tous droits réservés."
+    },
+    en: {
+      home: "Home",
+      about: "About",
+      service: "Service",
+      contact: "Contact",
+      heroTitle: "LabOnline <br/>Find your laboratory",
+      heroText: "Find the best lab for you now",
+      findLab: "Find a lab",
+      login: "Login",
+      servicesTitle: "Our Services",
+      servicesDesc: "Discover the features offered by LabOnline",
+      labsNearby: "🔬 Nearby Laboratories",
+      btnLocate: "Show labs around me",
+      footer: "&copy; 2025 LabOnline. All rights reserved."
+    },
+    ar: {
+      home: "الصفحة الرئيسية",
+      about: "من نحن",
+      service: "الخدمة",
+      contact: "اتصال",
+      heroTitle: "LabOnline <br/>ابحث عن مختبرك",
+      heroText: "ابحث عن أفضل مختبر لك الآن",
+      findLab: "ابحث عن مختبر",
+      login: "تسجيل الدخول",
+      servicesTitle: "خدماتنا",
+      servicesDesc: "اكتشف ميزات LabOnline",
+      labsNearby: "🔬 المختبرات القريبة منك",
+      btnLocate: "عرض المختبرات القريبة مني",
+      footer: "&copy; 2025 LabOnline. جميع الحقوق محفوظة."
+    }
+  };
+
+  const languageSelector = document.querySelector(".language-selector select");
+
+  function translate(lang) {
+    const t = translations[lang];
+    if (!t) return;
+
+    document.querySelector(".nav_link[href='index.html']").textContent = t.home;
+    document.querySelector(".nav_link[href='about.html']").textContent = t.about;
+    document.querySelector(".nav_link[href='#ser']").textContent = t.service;
+    document.querySelector(".nav_link[href='cntact.html']").textContent = t.contact;
+    document.querySelector(".hero h2").innerHTML = t.heroTitle;
+    document.querySelector(".hero p").textContent = t.heroText;
+    document.querySelector(".btn-labo").textContent = t.findLab;
+    document.querySelector(".btn-login").textContent = t.login;
+    document.querySelector("#ser h1").textContent = t.servicesTitle;
+    document.querySelector("#ser p").textContent = t.servicesDesc;
+    document.querySelector("#nearby-labs h2").textContent = t.labsNearby;
+    document.getElementById("btnLocate").textContent = t.btnLocate;
+    document.querySelector(".footer-bottom p").innerHTML = t.footer;
+  }
+
+  languageSelector.addEventListener("change", (e) => {
+    translate(e.target.value);
+  });
+
+  // Optionnel : langue par défaut
+  translate("fr");
+
+
+
     </script>
   </body>
 </html>

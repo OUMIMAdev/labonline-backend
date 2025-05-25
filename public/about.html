@@ -32,16 +32,15 @@
     }
 
     .container {
-      position: relative;
-      width: 800px;
-      max-width: 95%;
-      background-color: white;
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
       border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-      overflow: hidden;
       display: flex;
-      min-height: 500px;
-      flex-direction: row;
+      overflow: hidden;
+      margin-top: 100px;
+      margin-bottom: 50px;
     }
 
     .about-section {
@@ -130,9 +129,101 @@
         padding: 40px 30px;
       }
     }
+    header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 1000;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 35px;
+  padding-right: 80px;
+}
+
+.logo-img {
+  margin-top: 17px;
+  max-width: 200px;
+  height: 35px;
+  display: block;
+}
+
+.menu_items {
+  color: #189f91;
+  padding-top: 33px;
+  padding-right: 60px;
+  padding-left: 20px;
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  align-items: center;
+}
+
+.menu_items li a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.language-selector {
+  position: fixed;
+  top: 26px;
+  right: 20px;
+  z-index: 2000;
+}
+
+.language-selector select {
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: 1px solid #189f91;
+  background-color: white;
+  color: #189f91;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.language-selector select:focus {
+  outline: none;
+  border: 1px solid #189f91;
+}
+
+   body {
+  background-color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
   </style>
 </head>
 <body>
+  <header>
+    <nav class="nav">
+      <a href="#" class="nav_logo">
+            <img src="LA.png" alt="LabOnline Logo" class="logo-img">
+          </a>
+      <ul class="menu_items">
+  <li><a href="index.html" data-translate="nav_home">Home</a></li>
+  <li><a href="about.html" data-translate="nav_about">About</a></li>
+  <li><a href="index.html#ser" data-translate="nav_service">Service</a></li>
+  <li><a href="cntact.html" data-translate="nav_contact">Contact</a></li>
+</ul>
+
+    </nav>
+  </header>
+
+  <!-- Sélecteur de langue -->
+  <div class="language-selector">
+    <select>
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
   <div class="container">
     <div class="about-section">
       <img src="LAB.png" alt="Logo LabOnline" class="logo">
@@ -146,5 +237,74 @@
       <p>nous visons à rendre les soins de santé plus efficaces et accessibles.</p>
     </div>
   </div>
+  <script>
+  const translations = {
+    fr: {
+      nav_home: "Accueil",
+      nav_about: "À propos",
+      nav_service: "Service",
+      nav_contact: "Contact",
+      about_title: "À propos de LabOnline",
+      about_p1: "LabOnline est une plateforme innovante dédiée à la gestion des laboratoires médicaux. Elle facilite la prise de rendez-vous, la gestion des analyses et l'accès aux résultats, tant pour les professionnels de santé que pour les patients.",
+      about_p2: "Notre objectif est de moderniser les services de santé en Algérie en fournissant une solution numérique fiable, simple et rapide, tout en assurant la sécurité et la confidentialité des données médicales.",
+      mission_title: "Notre mission",
+      mission_p1: "Améliorer l'accès aux services médicaux en digitalisant la relation entre les laboratoires et les patients.",
+      mission_p2: "Nous visons à rendre les soins de santé plus efficaces et accessibles."
+    },
+    en: {
+      nav_home: "Home",
+      nav_about: "About",
+      nav_service: "Service",
+      nav_contact: "Contact",
+      about_title: "About LabOnline",
+      about_p1: "LabOnline is an innovative platform dedicated to managing medical laboratories. It facilitates appointment scheduling, test management, and result access for both healthcare professionals and patients.",
+      about_p2: "Our goal is to modernize healthcare services in Algeria by providing a reliable, simple, and fast digital solution while ensuring the security and confidentiality of medical data.",
+      mission_title: "Our Mission",
+      mission_p1: "Improve access to medical services by digitizing the relationship between laboratories and patients.",
+      mission_p2: "We aim to make healthcare more efficient and accessible."
+    },
+    ar: {
+      nav_home: "الرئيسية",
+      nav_about: "حول",
+      nav_service: "الخدمات",
+      nav_contact: "اتصال",
+      about_title: "حول LabOnline",
+      about_p1: "LabOnline هي منصة مبتكرة مخصصة لإدارة المختبرات الطبية. تسهّل حجز المواعيد وإدارة التحاليل والوصول إلى النتائج لكل من المهنيين الصحيين والمرضى.",
+      about_p2: "هدفنا هو تحديث خدمات الرعاية الصحية في الجزائر من خلال تقديم حل رقمي موثوق وبسيط وسريع مع ضمان أمان وسرية البيانات الطبية.",
+      mission_title: "مهمتنا",
+      mission_p1: "تحسين الوصول إلى الخدمات الطبية من خلال رقمنة العلاقة بين المختبرات والمرضى.",
+      mission_p2: "نهدف إلى جعل الرعاية الصحية أكثر كفاءة وسهولة في الوصول إليها."
+    }
+  };
+
+  const selector = document.querySelector(".language-selector select");
+
+  const applyTranslations = (lang) => {
+    document.querySelectorAll("[data-translate]").forEach((el) => {
+      const key = el.getAttribute("data-translate");
+      if (translations[lang] && translations[lang][key]) {
+        el.textContent = translations[lang][key];
+      }
+    });
+
+    // Sections sans data-translate
+    document.querySelector("h1").textContent = translations[lang].about_title;
+    document.querySelectorAll(".about-section p")[0].textContent = translations[lang].about_p1;
+    document.querySelectorAll(".about-section p")[1].textContent = translations[lang].about_p2;
+    document.querySelector(".info-section h2").textContent = translations[lang].mission_title;
+    document.querySelectorAll(".info-section p")[0].textContent = translations[lang].mission_p1;
+    document.querySelectorAll(".info-section p")[1].textContent = translations[lang].mission_p2;
+  };
+
+  selector.addEventListener("change", (e) => {
+    applyTranslations(e.target.value);
+  });
+
+// facultatif : appliquer la langue par défaut
+  window.addEventListener("DOMContentLoaded", () => {
+    applyTranslations(selector.value);
+  });
+</script>
+
 </body>
 </html>

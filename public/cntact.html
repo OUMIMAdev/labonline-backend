@@ -24,36 +24,44 @@
         }
         
         body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            margin: 0;
+            padding-bottom: 50px;
+            min-height: 50vh;
             background-color: #ffffff;
-            position: relative;
         }
-        
+
         .container {
-            position: relative;
-            width: 700px;
-            max-width: 95%;
-            background-color: white;
+            max-width: 1200px;
+            max-height: 550px;
+            margin: auto;
+            background: white;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
             display: flex;
-            min-height: 500px;
+            overflow: hidden;
+            margin-top: 80px;
+            margin-bottom: 50px;
+        }
+
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        body.fade-in {
+            opacity: 1;
         }
         
         .contact-form-section {
             width: 50%;
-            padding: 25px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
         
         .info-section {
-            width: 50%;
+            width: 100%;
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: white;
             display: flex;
@@ -61,7 +69,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             position: relative;
             overflow: hidden;
         }
@@ -69,8 +77,8 @@
         .info-section::before {
             content: '';
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 150px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             top: -100px;
@@ -80,8 +88,8 @@
         .info-section::after {
             content: '';
             position: absolute;
-            width: 200px;
-            height: 200px;
+            width: 300px;
+            height: 100px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             bottom: -50px;
@@ -215,57 +223,147 @@
         }
         
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            
-            .contact-form-section, 
-            .info-section {
-                width: 100%;
-                padding: 40px 30px;
+            @media (max-width: 768px) {
+                .container {
+                    width: 95%;
+                }
+
+                .contact-form-section,
+                .info-section {
+                    padding: 20px;
+                }
             }
             
             .info-section {
                 padding: 60px 30px;
             }
         }
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 35px;
+            padding-right: 80px;
+        }
+
+        .logo-img {
+            margin-top: 17px;
+            max-width: 200px;
+            height: 35px;
+            display: block;
+        }
+
+        .menu_items {
+            color: #189f91;
+            padding-top: 33px;
+            padding-right: 60px;
+            padding-left: 20px;
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .menu_items li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .language-selector {
+            position: fixed;
+            top: 26px;
+            right: 20px;
+            z-index: 2000;
+        }
+
+        .language-selector select {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #189f91;
+            background-color: white;
+            color: #189f91;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .language-selector select:focus {
+            outline: none;
+            border: 1px solid #189f91;
+        }
+
+        body {
+            background-color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <header>
+        <nav class="nav">
+            <a href="#" class="nav_logo">
+                <img src="LA.png" alt="LabOnline Logo" class="logo-img">
+            </a>
+            <ul class="menu_items">
+                <li><a href="index.html" data-translate="nav_home">Home</a></li>
+                <li><a href="about.html" data-translate="nav_about">About</a></li>
+                <li><a href="index.html#ser" data-translate="nav_service">Service</a></li>
+                <li><a href="cntact.html" data-translate="nav_contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="language-selector">
+        <select id="languageSelector">
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+    <div class="container" id="cn">
         <div class="contact-form-section">
-            <img src="LAB.png" alt="LabOnline Logo" class="logo">
-            <h1>Contactez-nous</h1>
-            <p>Remplissez le formulaire pour nous envoyer un message</p>
+            <h1 data-translate="contact_title">Contactez-nous</h1>
+            <p data-translate="contact_subtitle">Remplissez le formulaire pour nous envoyer un message</p>
             
             <form id="contactForm">
                 <div class="form-group">
                     <i class="fas fa-user"></i>
-                    <input type="text" id="name" placeholder="Votre nom" required>
+                    <input type="text" id="name" data-translate-placeholder="name_placeholder" placeholder="Votre nom" required>
                 </div>
                 
                 <div class="form-group">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" placeholder="Votre email" required>
+                    <input type="email" id="email" data-translate-placeholder="email_placeholder" placeholder="Votre email" required>
                 </div>
                 
                 <div class="form-group">
                     <i class="fas fa-phone"></i>
-                    <input type="tel" id="phone" placeholder="Votre téléphone">
+                    <input type="tel" id="phone" data-translate-placeholder="phone_placeholder" placeholder="Votre téléphone">
                 </div>
                 
                 <div class="form-group">
                     <i class="fas fa-comment"></i>
-                    <textarea id="message" placeholder="Votre message" required></textarea>
+                    <textarea id="message" data-translate-placeholder="message_placeholder" placeholder="Votre message" required></textarea>
                 </div>
                 
-                <button type="submit">Envoyer le message</button>
+                <button type="submit" data-translate="submit_button">Envoyer le message</button>
             </form>
         </div>
         
         <div class="info-section">
-            <h1>Nos coordonnées</h1>
-            <p>Nous sommes disponibles pour répondre à vos questions</p>
+            <h1 data-translate="contact_info_title">Nos coordonnées</h1>
+            <p data-translate="contact_info_subtitle">Nous sommes disponibles pour répondre à vos questions</p>
             
             <div class="contact-info">
                 <div class="contact-item">
@@ -308,10 +406,97 @@
     </div>
 
     <script>
+        // Dictionnaire de traductions
+        const translations = {
+            "fr": {
+                "nav_home": "Accueil",
+                "nav_about": "À propos",
+                "nav_service": "Services",
+                "nav_contact": "Contact",
+                "contact_title": "Contactez-nous",
+                "contact_subtitle": "Remplissez le formulaire pour nous envoyer un message",
+                "name_placeholder": "Votre nom",
+                "email_placeholder": "Votre email",
+                "phone_placeholder": "Votre téléphone",
+                "message_placeholder": "Votre message",
+                "submit_button": "Envoyer le message",
+                "contact_info_title": "Nos coordonnées",
+                "contact_info_subtitle": "Nous sommes disponibles pour répondre à vos questions"
+            },
+            "en": {
+                "nav_home": "Home",
+                "nav_about": "About",
+                "nav_service": "Service",
+                "nav_contact": "Contact",
+                "contact_title": "Contact Us",
+                "contact_subtitle": "Fill out the form to send us a message",
+                "name_placeholder": "Your name",
+                "email_placeholder": "Your email",
+                "phone_placeholder": "Your phone",
+                "message_placeholder": "Your message",
+                "submit_button": "Send message",
+                "contact_info_title": "Our contact details",
+                "contact_info_subtitle": "We are available to answer your questions"
+            },
+            "ar": {
+                "nav_home": "الرئيسية",
+                "nav_about": "من نحن",
+                "nav_service": "الخدمات",
+                "nav_contact": "اتصل بنا",
+                "contact_title": "اتصل بنا",
+                "contact_subtitle": "املأ النموذج لإرسال رسالة لنا",
+                "name_placeholder": "اسمك",
+                "email_placeholder": "بريدك الإلكتروني",
+                "phone_placeholder": "هاتفك",
+                "message_placeholder": "رسالتك",
+                "submit_button": "إرسال الرسالة",
+                "contact_info_title": "معلومات الاتصال",
+                "contact_info_subtitle": "نحن متاحون للإجابة على أسئلتك"
+            }
+        };
+
+        // Fonction pour changer la langue
+        function changeLanguage(lang) {
+            // Traduire les éléments avec data-translate
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Traduire les placeholders
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    element.setAttribute('placeholder', translations[lang][key]);
+                }
+            });
+
+            // Sauvegarder la langue préférée
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
+        // Écouteur d'événement pour le sélecteur de langue
+        document.getElementById('languageSelector').addEventListener('change', function() {
+            const lang = this.value;
+            changeLanguage(lang);
+        });
+
+        // Initialiser avec la langue sauvegardée ou le français par défaut
+        document.addEventListener('DOMContentLoaded', function() {
+            const preferredLanguage = localStorage.getItem('preferredLanguage') || 'fr';
+            document.getElementById('languageSelector').value = preferredLanguage;
+            changeLanguage(preferredLanguage);
+            
+            // Effet fade-in
+            document.body.classList.add("fade-in");
+        });
+
+        // Gestion du formulaire
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Récupération des données du formulaire
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -319,13 +504,28 @@
                 message: document.getElementById('message').value
             };
             
-            // Ici vous ajouteriez le code pour envoyer les données au serveur
             console.log('Message envoyé:', formData);
-            
-            // Message de confirmation (à remplacer par un vrai système)
-            alert('Merci pour votre message! Nous vous contacterons bientôt.');
+            alert(translations[document.getElementById('languageSelector').value]['form_submitted'] || 'Merci pour votre message! Nous vous contacterons bientôt.');
             this.reset();
         });
+
+        // Effets de transition entre pages
+        document.querySelectorAll("a").forEach(function(link) {
+            link.addEventListener("click", function(e) {
+                const href = link.getAttribute("href");
+
+                if (!href.startsWith("#") && !href.startsWith("http")) {
+                    e.preventDefault();
+                    document.body.classList.remove("fade-in");
+                    document.body.style.opacity = 0;
+
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 300);
+                }
+            });
+        });
+        
     </script>
 </body>
 </html>
