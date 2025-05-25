@@ -13,6 +13,9 @@ router.post('/', async (req, res) => {
     res.status(500).json({ error: 'Erreur lors de la prise de RDV' });
   }
 });
+router.get('/test', (req, res) => {
+  res.send('Route RDV test OK');
+});
 
 // GET : Tous les RDV
 router.get('/', async (req, res) => {
